@@ -1,6 +1,5 @@
 Tower-Of-Hanoi
-
-===
+====
 
 ## Description
 
@@ -23,6 +22,6 @@ GUI based ToH (Tower of Hanoi) developed purely on C. Having feature like "Mouse
 
 6)AND ENJOY THE GAME .
 
-Thank for playing;
+Thank for playing :)
 ---
 Last updated: 8/4/2011 2:13AM
