@@ -9,18 +9,18 @@ GUI based ToH (Tower of Hanoi) developed purely on C. Having feature like "Mouse
 
 ## Setup
 
-1)Copy the folder name "ToH" to the C:\tc\bin
+1) Copy the folder name "ToH" to the C:\tc\bin
 
-2)open the tc
+2) Open the tc
 
-3)In tc goto 
+3) In tc goto 
 	option>compiler>code generation
 
-4)Change the model type from small to huge.
+4) Change the model type from small to huge.
 
-5)open the file play.cpp or start.cpp from tc.
+5) open the file play.cpp or start.cpp from tc.
 
-6)AND ENJOY THE GAME .
+6) ENJOY THE GAME .
 
 Thank for playing :)
 ---
