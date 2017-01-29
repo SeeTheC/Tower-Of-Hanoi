@@ -1,0 +1,144 @@
+void blast();
+void airload()
+{
+	int ki=130,li=268,mi=10,l;
+	int a=DETECT,b;
+	initgraph(&a,&b,"..\\bgi");
+	///// pump
+
+	rectangle(30,200,40,275);
+	ellipse(78,270,180,350,30,10);
+	ellipse(78,268,180,350,30,10);
+	rectangle(20,274,50,275);
+	rectangle(30,200,40,275);
+	rectangle(40,270,48,272);
+	setfillstyle(1,15);
+	bar(18,180,52,183);
+
+	bar(32,183,38,275);
+	fillellipse(117,273,10,3);
+	setcolor(YELLOW);
+	settextstyle(7,0,3);
+	outtextxy(170,40,"!!! Press Any Key !!!");
+	getch();
+	setfillstyle(1,0);
+	bar(112,20,getmaxx()-20,160);
+	settextstyle(7,0,2);
+	outtextxy(100,50,"!!! LOADING !!!");
+	setfillstyle(1,WHITE);
+	int p,zz=1;
+	char str[10]="0%";
+	outtextxy(370,350," compeleted");
+	for( ki=130,li=268,mi=10;ki<300,li>160,mi<120;ki+=9,mi+=8,li-=6)
+	{
+	for(int ii=0;ii<=50;ii++)
+	{
+
+		setcolor(BLACK);
+		setfillstyle(1,WHITE);
+		bar(18,180-ii,52,183-ii);
+		bar(32,183-ii,38,275);
+		delay(5);
+		if(ii!=50)
+		{
+
+			setfillstyle(1,0);
+			bar(18,180-ii,52,183-ii);
+		}
+		setcolor(RED);
+		outtextxy(320,350,str);
+
+
+
+	}
+	for( ii=0;ii<=50;ii++)
+	{
+
+		setcolor(BLACK);
+		setfillstyle(1,WHITE);
+		bar(18,130+ii,52,133+ii);
+		bar(32,133+ii,38,225);
+		delay(5);
+		if(ii!=50)
+		{
+
+			setfillstyle(1,0);
+			bar(18,130+ii,52,133+ii);
+
+		}
+	}
+	setcolor(WHITE);
+	fillellipse(ki,li,mi,mi);
+	zz++;
+		if(zz>=0)
+		{
+			p=7.2*zz;
+			itoa(p,str,10);
+			for(l=0;str[l]!='\0';l++);
+			str[l]='%';
+			str[l+1]='\0';
+			setcolor(4);
+			rectangle(312,348,368,374);
+			setfillstyle(1,0);
+			bar(318,350,362,370);
+		}
+	}
+	blast();
+}
+void blast()
+{
+	 setcolor(RED);
+	 setfillstyle(1,RED);
+	 sector(240,220,20,100,70,90);
+	 sector(200,120,300,350,80,80);
+	 sector(250,90,280,320,80,70);
+	 sector(330,110,200,270,80,60);
+	 sector(370,170,150,190,80,50);
+	 sector(330,220,100,160,80,60);
+	 //delay(100);
+	  setcolor(YELLOW);
+	 setfillstyle(1,YELLOW);
+
+	 sector(240,320,20,100,70,90);
+	 sector(200,220,300,350,80,80);
+	 sector(250,190,280,320,80,70);
+	 sector(330,210,200,270,80,60);
+	 sector(370,270,150,190,80,50);
+	 sector(330,320,100,160,80,60);
+	  setcolor(1);
+	 setfillstyle(1,1);
+
+	 sector(170,320,20,100,70,90);
+	 sector(130,220,300,350,80,80);
+	 sector(180,190,280,320,80,70);
+	 sector(260,210,200,270,80,60);
+	 sector(300,270,150,190,80,50);
+	 sector(260,320,100,160,80,60);
+	 delay(10);
+	 //getch();
+
+
+	 setcolor(0);
+	 setfillstyle(1,0);
+	 sector(240,220,20,100,70,90);
+	 sector(200,120,300,350,80,80);
+	 sector(250,90,280,320,80,70);
+	 sector(330,110,200,270,80,60);
+	 sector(370,170,150,190,80,50);
+	 sector(330,220,100,160,80,60);
+	 sector(240,320,20,100,70,90);
+	 sector(200,220,300,350,80,80);
+	 sector(250,190,280,320,80,70);
+	 sector(330,210,200,270,80,60);
+	 sector(370,270,150,190,80,50);
+	 sector(330,320,100,160,80,60);
+	 sector(170,320,20,100,70,90);
+	 sector(130,220,300,350,80,80);
+	 sector(180,190,280,320,80,70);
+	 sector(260,210,200,270,80,60);
+	 sector(300,270,150,190,80,50);
+	 sector(260,320,100,160,80,60);
+	 delay(100);
+
+	cleardevice();
+}

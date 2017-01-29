@@ -1,0 +1,315 @@
+#include<iostream.h>
+#include<conio.h>
+#include<graphics.h>
+#include<stdio.h>
+#include<dos.h>
+#include<math.h>
+
+
+// button(int x=150,int y=110,int height=10,int color=9,char *str="ok",int textcolor=0,int clicked=0)
+
+int clicked1=0;
+int clicked2=0;
+int clickedring=0;
+int path_radius[10][2];
+int colorpath[17][3];
+int rx,ry;
+int bx,by,bh=100;
+int tx,ty;
+int tx1,tx2,txy1,ty2;
+int prevx1,prevx2,prevy1,prevy2;
+int ax1=0,ax2=0,ay1=0,ay2=0;
+
+int ringcolor[10];
+int temp_no_of_ring=3;
+Mouse m1;
+void colorbox();
+
+void arrow(int x,int y )
+{
+
+	int i,j;
+	setcolor(8);
+	setfillstyle(2,3);
+	//100,100,150,110
+	ax1=x;
+	ay1=y;
+	ax2=ax1+50;
+	ay2=ay1+10;
+
+	bar(ax1,ay1,ax2,ay2);
+	/*
+	for(i=0;i<10;i++)
+	{
+		line(110+i,100-10,100-10+i,105);
+		line(110+i,100+20,100-10+i,105);
+
+	}
+	*/
+	for(i=0;i<10;i++)
+	{
+		line(ax1+10+i,ay1-10,ax1-10+i,(ay1+ay2)/2);
+		line(ax1+10+i,ay1+20,ax1-10+i,(ay1+ay2)/2);
+
+	}
+
+
+}
+void defaultcolor()
+{
+
+	int i=0;
+	for(i=0;i<10;i++)
+	{
+		ringcolor[i]=2+i;
+	}
+
+}
+void initcolorstack()
+{
+	for(int i=0;i<no_of_rings;i++)
+	{
+	      tempcol1.push(ringcolor[i]);
+
+	}
+
+}
+void ringcolortower()
+{
+	tx=200;
+	ty=150;
+	rx=tx;
+	ry=ty;
+
+	setfillstyle(2,6);
+	bar(rx-100,308-13,rx+100,308+13);//base1
+	setfillstyle(2,6);
+	bar(rx-4,ry-13,rx+4,308+13);//base1
+
+
+}
+int towerring(float x,float y,int clicked)
+{
+	int radius=20,i;
+	int found=0;
+	rx=tx;
+	ry=ty;
+	for(i=0;i<10;i++)
+	{
+
+		setfillstyle(1,ringcolor[i]);
+		path_radius[i][0]=ry;
+		path_radius[i][1]=radius;
+
+		setcolor(ringcolor[i]);
+		if(clicked==1)
+		{
+			if(x>=rx-radius&&y>=ry-5&&x<=rx+radius&&y<=ry+5)
+			{
+				clickedring=i;
+				found=1;
+				setfillstyle(1,0);
+				bar(ax1-10,ay1-10,ax2,ay2+10);
+				arrow(rx+radius+50,ry-5);
+
+				bx=ax2+(10*strlen("       "))+20;
+				by=ay1+(bh/2);
+
+				colorbox();
+				setcolor(0);
+				setfillstyle(1,ringcolor[i]);
+
+			}
+
+
+		}
+
+		fillellipse(rx,ry,radius,5);
+		radius=radius+10;
+		ry=ry+15;
+	}
+	return found;
+}
+void colorbox()
+{
+
+	int cx,cy;
+	int i;
+	bh=100;
+
+	button(bx,by,bh,9,"       ",6,0);
+	cx=bx-50;
+	cy=by-(bh/2)+15;
+	button(bx,cy-20,20,9,"COLORS ",6,0);
+	for(i=1;i<=15;i++)
+	{
+		colorpath[i][0]=cx;
+		colorpath[i][1]=cy;
+		colorpath[i][2]=i;
+
+		button(cx,cy,10,i," ",3,0);
+
+		cx=cx+25;
+		if(cx>bx+50)
+		{
+			cx=bx-50;
+			cy=cy+20;
+		}
+
+	}
+	cx=bx;
+	colorpath[i][0]=cx;
+	colorpath[i][1]=cy+10;
+	colorpath[i][2]=-1;
+	button(cx,cy+10,20,7,"Default",5,0);
+
+
+}
+void clearbox()
+{
+	int cx,cy;
+	setfillstyle(1,0);
+
+	bar(bx-(10*strlen("       ")),by-(bh/2),bx+(10*strlen("       ")),by+(bh/2));
+	cx=bx-50;
+	cy=by-(bh/2)+15;
+	bar(bx-(10*strlen("COLORS ")),cy-20-10,bx+(10*strlen("COLORS ")),cy-20+10);
+
+	bx=0;
+	by=0;
+}
+void back()
+{
+	button(550,400,20,6,"BACK ",4,0);
+
+}
+void ringcontroler()
+{
+
+	int b,x,y,i,j;
+
+	ringcolortower();
+	towerring(0,0,0);
+
+	back();
+
+	m1.initmouse();
+	m1.showmouseptr();
+
+	while(1)
+	{
+		m1.getmousepos(&b,&x,&y);
+		i=1;
+		while(b==1)
+		{
+			m1.getmousepos(&b,&x,&y);
+			m1.hidemouseptr();
+			if(x>=550-(10*strlen("BACK "))&& y>=400-20&&x<=550+(10*strlen("BACK "))&&y<=400+20&& b==1)
+			{
+					clicked1=1;
+					button(550,400,20,6,"BACK ",4,clicked1);
+					m1.hidemouseptr();
+					goto down;
+
+			}
+
+			if( x>=bx-(10*strlen("       "))&& y>=by-(bh/2)&&x<=bx+(10*strlen("       "))&&y<=by+(bh/2)&& b==1 && clicked2==1)
+			{
+
+				for(i=1;i<=16 ;i++)
+				{
+					if(i<=15)
+					{
+						if(x>=colorpath[i][0]-(10*strlen(" "))&& y>=colorpath[i][1]-5&&x<=colorpath[i][0]+(10*strlen(" "))&&y<=colorpath[i][1]+5&& b==1)
+						{
+
+							clicked1=1;
+							button(colorpath[i][0],colorpath[i][1],10,i," ",3,1);
+							ringcolor[clickedring]=i;
+							towerring(0,0,0);
+							goto down;
+						}
+					}
+					else
+					{
+
+						if(x>=colorpath[i][0]-(10*strlen("Default"))&& y>=colorpath[i][1]-10&&x<=colorpath[i][0]+(10*strlen("Default"))&&y<=colorpath[i][1]+10&& b==1)
+						{
+
+							clicked1=1;
+							m1.hidemouseptr();
+							button(colorpath[i][0],colorpath[i][1],20,7,"Default",5,clicked1);
+							defaultcolor();
+							towerring(0,0,0);
+							goto down;
+						}
+
+
+					}
+
+
+				}
+			}
+			else
+			{
+
+				if(clicked2==1)
+				{
+					clearbox();
+				}
+				for(j=0;j<10;j++)
+				{
+
+				     clicked2=towerring(x,y,1);
+				     if(clicked2==1)
+				     {
+						break;
+				     }
+				}
+
+			}
+			down:
+			while(b==1)
+				m1.getmousepos(&b,&x,&y);
+
+
+		}
+
+		if(clicked1==1)
+		{
+			clicked1=0;
+			if(x>=550-(10*strlen("BACK "))&& y>=400-20&&x<=550+(10*strlen("BACK "))&&y<=400+20)
+			{
+					button(550,400,20,6,"BACK ",4,clicked1);
+					cleardevice();
+					return;
+
+			}
+			if(i!=16)
+				button(colorpath[i][0],colorpath[i][1],10,i," ",3,clicked1);
+			else
+				button(colorpath[i][0],colorpath[i][1],20,7,"Default",5,clicked1);
+	      //		m1.showmouseptr();
+
+		}
+		m1.showmouseptr();
+
+
+
+	}
+
+}
+/*
+void main()
+{
+	int gd,gm;
+	detectgraph(&gd,&gm);
+	initgraph(&gd,&gm,"..\\bgi");
+
+	ringcontroler();
+	cout<<"sdfd";
+
+	getch();
+	closegraph();
+}
+*/

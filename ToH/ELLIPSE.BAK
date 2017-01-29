@@ -1,0 +1,141 @@
+#include<iostream.h>
+#include<conio.h>
+#include<graphics.h>
+#include<math.h>
+void ellipse1(int x1,int y1,float r1,float r2,int color,float rot)
+{
+      float x,y,tx,ty;
+      float i=0;
+      float rad;
+      rot=(float)(rot*22)/(180*7);
+      while(i<=360)
+      {
+	    rad=(float)(i*22)/(180*7);
+	    x=r1*cos(rad);
+	    y=r2*sin(rad);
+	    tx=x;
+	    ty=y;
+	    x=(tx*cos(rot))-(ty*sin(rot));
+	    y=(tx*sin(rot))+(ty*cos(rot));
+	    x=ceil(x);
+	    y=ceil(y);
+	    putpixel(x1+x,y1+y,color);
+	    i+=1;
+	}
+
+
+}
+void rotate(int a,float x1,float y1,int rx,int ry,int endx,int endy,int color,int speed)
+{
+	float i=0;
+	setcolor(3);
+	int j;
+	int flag=0;
+	int start;
+	float mid,slope;
+	float x,y;
+	int sign;
+	x=(float)x1;
+	y=(float)y1;
+
+	start=x;
+
+	mid=(float)(start+endx)/2;
+	if((mid-start)!=0)
+		slope=(float)(y)/(mid-start);
+	else
+		slope=999;
+
+
+
+//	cout<<"  slope="<<slope;
+	for(j=0;j<5;j++)
+		ellipse1(x,y,rx+j,ry+j,color,i); //black
+
+
+
+
+	if(slope==999)
+	{
+		i=0;
+		if(endy>y)//i.e up to down
+			sign=-1;
+		else
+			sign=1;
+		do
+		{
+		if(a==1)
+		{
+			setcolor(15);
+			rectangle(3,3,getmaxx()-1,getmaxy()-1);
+		}
+			for(j=0;j<5;j++)
+				ellipse1(x,y,rx+j,ry+j,color,i);
+
+			for(j=0;j<5;j++)
+				ellipse1(x,y,rx+j,ry+j,0,i);
+
+		       if(flag==0)
+				y-=(speed*sign);
+			else
+				y=y+(speed*sign);
+			if(y1<=endy)
+			{
+				if(y<0)
+				{
+					y=y+speed;
+					flag=1;
+				}
+			}
+			else
+			{
+				if(y<endy)
+				{
+					y=y+speed;
+					flag=1;
+					break;
+				}
+			}
+			i+=10;
+
+		}while((y<endy&&y1<endy)||(y>endy&&y1>endy));
+
+	}
+	if(slope<0)
+		sign=-1;
+	else
+		sign=1;
+	while((x<endx&&sign==1)||(endx<x &&sign==-1))
+	{
+		if(a==1)
+		{
+			setcolor(15);
+			rectangle(3,3,getmaxx()-13,getmaxy()-13);
+		}
+		for(j=0;j<5;j++)
+		ellipse1(x,y,rx+j,ry+j,color,i);
+
+		for(j=0;j<5;j++)
+			ellipse1(x,y,rx+j,ry+j,0,i);
+
+		x+=(speed*sign);
+
+		if(flag==0)
+			y=y-(float)(speed*slope*sign);
+		else
+			y=y+(float)(speed*slope*sign);
+		if(y<0)
+		{
+			y=0;
+			y=y+(float)(speed*slope*sign);
+			flag=1;
+		}
+		i+=(30*sign);
+	}
+
+	//cout<<"\nx="<<x<<" y="<<y;
+	for(j=0;j<5;j++)
+		ellipse1(x,y,rx+j,ry+j,0,0); //black
+
+}
+

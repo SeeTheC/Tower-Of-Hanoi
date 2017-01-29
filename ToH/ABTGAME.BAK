@@ -1,0 +1,136 @@
+#include "cgfinal/gamehelp.cpp"
+#include "cgfinal/abtmenu.cpp"
+void opt(int n)
+{
+	int col1,col2,col3;
+	switch(n)
+	{
+	case 1:
+	col1=6;col2=0;col3=0;
+	ddarect(190,190,450,230,col1);
+	ddarect(192,192,448,228,col1);
+	setcolor(col1-3);
+	settextstyle(7,0,2);
+	outtextxy(420,205,"???");
+
+	ddarect(190,250,450,290,col2);
+	ddarect(192,252,448,288,col2);
+	setcolor(col2);
+	settextstyle(7,0,2);
+	outtextxy(420,265,"???");
+
+	ddarect(478,421,627,462,col3);
+	ddarect(480,423,625,460,col3);
+	setcolor(col3);
+	settextstyle(7,0,2);
+	outtextxy(605,435,"!!!");
+	break;
+	case 2:
+	col1=0;col2=6;col3=0;
+	ddarect(190,190,450,230,col1);
+	ddarect(192,192,448,228,col1);
+	setcolor(col1);
+	settextstyle(7,0,2);
+	outtextxy(420,205,"???");
+
+	ddarect(190,250,450,290,col2);
+	ddarect(192,252,448,288,col2);
+	setcolor(col2-3);
+	settextstyle(7,0,2);
+	outtextxy(420,265,"???");
+
+	ddarect(478,421,627,462,col3);
+	ddarect(480,423,625,460,col3);
+	setcolor(col3);
+	settextstyle(7,0,2);
+	outtextxy(605,435,"!!!");
+	break;
+
+	case 3:
+	col1=0;col2=0;col3=3;
+	ddarect(190,190,450,230,col1);
+	ddarect(192,192,448,228,col1);
+	setcolor(col1);
+	settextstyle(7,0,2);
+	outtextxy(420,205,"???");
+
+	ddarect(190,250,450,290,col2);
+	ddarect(192,252,448,288,col2);
+	setcolor(col2);
+	settextstyle(7,0,2);
+	outtextxy(420,265,"???");
+
+	ddarect(478,421,627,462,col3);
+	ddarect(480,423,625,460,col3);
+	setcolor(col3);
+	settextstyle(7,0,2);
+	outtextxy(605,435,"!!!");
+	break;
+	}
+}
+int select1(int no_of_options,int curr)
+{
+	int ch=80,yaxis;
+	do{
+
+		switch(ch)
+		{
+			case 72 : 			/* Up key */
+				if(curr==1)
+					curr=no_of_options;
+				else
+					curr=curr-1;
+
+				opt(curr);
+				break;
+
+			case 80 : 			/* Down key */
+				if(curr==no_of_options)
+					curr=1;
+				else
+					curr=curr+1;
+				opt(curr);
+				break;
+
+		}
+		ch=getch();
+	}while(ch!=13);
+
+	return(curr);
+}
+
+void abtgame()
+{
+	int abc;
+	do{
+
+	ddarect(3,3,getmaxx()-3,getmaxy()-3,GREEN);
+	ddarect(8,8,getmaxx()-8,getmaxy()-8,GREEN);
+
+	setcolor(9);
+	settextstyle(7,1,5);
+	outtextxy(10,95,"HELP ABOUT...");
+
+	setcolor(12);
+	settextstyle(7,0,3);
+	outtextxy(210,195,"HOW TO PLAY");
+	outtextxy(210,255,"MENU OPTIONS");
+
+
+	settextstyle(8,0,2);
+	outtextxy(490,425,"<< BACK");
+
+	abc=select1(3,3);
+	setfillstyle(1,0);
+	bar(9,9,getmaxx()-9,getmaxy()-9);
+
+	switch(abc)
+	{
+		case 1 :
+			howtoplay();
+			 break;
+		case 2 : aboutmenu();
+			 break;
+	}
+	}while(abc!=3);
+}
