@@ -1,9 +1,13 @@
 Tower-Of-Hanoi
 
 ===
+
 ## Description
+
 GUI based ToH (Tower of Hanoi) developed purely on C. Having feature like "Mouse" interaction, "3-d Button", awesome UI etc.
+
 ---
+
 ## Setup
 
 1)Copy the folder name "ToH" to the C:\tc\bin
